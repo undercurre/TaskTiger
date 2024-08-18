@@ -1,41 +1,28 @@
 <template>
-  <view class="content">
-    <image class="logo" src="/static/logo.png" />
-    <view class="text-area">
-      <text class="title">{{ title }}</text>
-    </view>
-  </view>
+	<up-card :title="title" :sub-title="subTitle" :thumb="thumb">
+        <template #body>
+            <view class="" slot="body">
+                <view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
+                    <view class="u-body-item-title u-line-2">瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半</view>
+                    <image src="https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg" mode="aspectFill"></image>
+                </view>
+                <view class="u-body-item u-flex u-row-between u-p-b-0">
+                    <view class="u-body-item-title u-line-2">釉色渲染仕女图韵味被私藏，而你嫣然的一笑如含苞待放</view>
+                    <image src="https://img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg" mode="aspectFill"></image>
+                </view>
+            </view>
+        </template>
+        <template #foot>
+		    <view>
+                <up-icon name="chat-fill" size="34" color="" label="30评论"></up-icon>
+            </view>
+        </template>
+	</up-card>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-const title = ref('Hello')
+<script lang="ts" setup>
+	import { ref } from 'vue';
+	const title = ref('素胚勾勒出青花，笔锋浓转淡');
+	const subTitle = ref('2020-05-15');
+	const thumb = ref('http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg');
 </script>
-
-<style>
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo {
-  height: 200rpx;
-  width: 200rpx;
-  margin-top: 200rpx;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50rpx;
-}
-
-.text-area {
-  display: flex;
-  justify-content: center;
-}
-
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
-}
-</style>
