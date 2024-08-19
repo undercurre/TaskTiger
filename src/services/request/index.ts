@@ -15,7 +15,7 @@ const http: AxiosInstance = axios.create({
 http.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     // 在请求发送之前做些什么
-    const token = localStorage.getItem('token'); // 假设 token 存储在 localStorage 中
+    const token = uni.getStorageSync('token'); // 假设 token 存储在 localStorage 中
     if (token) {
       config.headers.Authorization = `Bearer ${token}`; // 添加 token 到请求头
     }

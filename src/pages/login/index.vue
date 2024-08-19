@@ -11,20 +11,32 @@
 			</up-form-item>
 		</up-form>
 		<view class="button">
-			<up-button type="primary" text="Login"></up-button>
+			<up-button type="primary" text="Login" @click="submitLogin"></up-button>
 		</view>
 	</view>
 </template>
 
 <script lang="ts" setup>
+	import { getPublicKey, login } from '@/apis/login';
 	import { reactive } from 'vue';
+	import CryptoJS from "crypto-js";
+	import { encryptSymmetricKey } from "@/utils/crypto/encryte";
 
 	const form = reactive({
 		username: '',
 		password: '',
 	});
-	
-	
+
+	async function submitLogin() {
+		const publicKeyRes = await getPublicKey();
+		const publicKey = publicKeyRes.data.publicKey;
+		console.log('公钥', publicKey);
+		const symmetricKey = CryptoJS.lib.WordArray.random(32).toString();
+		const hashedPassword = CryptoJS.SHA256(form.password).toString();
+		const encryptedPassword = CryptoJS.AES.encrypt(hashedPassword, symmetricKey).toString();
+		const encryptedSymmetricKey = await encryptSymmetricKey(publicKey, symmetricKey);
+		login({username: form.username, password: encryptedPassword, key: encryptedSymmetricKey});
+	}
 </script>
 
 <style scoped>
@@ -39,11 +51,11 @@
 		margin-bottom: 20px;
 		width: 100%;
 	}
-	
+
 	.form {
 		width: 100%;
 	}
-	
+
 	.button {
 		margin-top: 20px;
 	}
