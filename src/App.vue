@@ -9,7 +9,7 @@
 		const currentPage = getCurrentPages().pop();
 		const token = uni.getStorageSync('token');
 
-		if (!token && currentPage?.route !== 'pages/login/index') {
+		if (!token && currentPage?.route !== 'pages/login/') {
 			// 如果没有 token 且当前页面不是登录页，则重定向到登录页
 			uni.redirectTo({
 				url: '/pages/login/index',

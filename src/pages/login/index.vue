@@ -3,13 +3,11 @@
 		<text class="title">Login</text>
 		<up-form :model="form" labelPosition="left">
 			<up-form-item labelWidth="80" class="input" label="Username:" borderBottom>
-				<up-input border="none" v-model="form.username"
-					@change="changeUsername"></up-input>
+				<up-input border="none" v-model="form.username"></up-input>
 			</up-form-item>
 
 			<up-form-item labelWidth="80" class="input" label="Password:" borderBottom>
-				<up-input type="password" border="none" v-model="form.password"
-					@change="changePassword"></up-input>
+				<up-input type="password" border="none" v-model="form.password"></up-input>
 			</up-form-item>
 		</up-form>
 		<view class="button">
@@ -25,14 +23,8 @@
 		username: '',
 		password: '',
 	});
-
-	const changeUsername = (e : string) => {
-		console.log('change', e);
-	};
-
-	const changePassword = (e : string) => {
-		console.log('change', e);
-	};
+	
+	
 </script>
 
 <style scoped>
