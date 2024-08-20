@@ -60,7 +60,7 @@
     "@dcloudio/uni-quickapp-webview": "3.0.0-4020420240722002",
     "axios": "^1.7.4",
     "clipboard": "^2.0.11",
-    "crypto-js": "^4.2.0",
+    "crypto-es": "^2.1.0",
     "dayjs": "^1.11.12",
     "jsencrypt": "^3.3.2",
     "uni-axios-adapter-all": "^0.0.10",

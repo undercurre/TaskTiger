@@ -2,12 +2,15 @@
 import axios from 'axios'
 import type { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import uniAdapter from 'uni-axios-adapter-all';
+import {config} from '../../../env.config';
 
 axios.defaults.adapter = uniAdapter;
 
+const { uniPlatform } = uni.getSystemInfoSync();
+
 // 创建 Axios 实例
 const http: AxiosInstance = axios.create({
-  baseURL: '/api', // API 基础路径，可以从环境变量中获取
+  baseURL: uniPlatform === 'web' ? '/api' : config.BASE_API, // API 基础路径，可以从环境变量中获取
   timeout: 10000, // 请求超时时间
 });
 

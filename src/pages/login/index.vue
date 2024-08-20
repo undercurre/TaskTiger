@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 	import { getPublicKey, login } from '@/apis/login';
 	import { reactive } from 'vue';
-	import CryptoJS from "crypto-js";
+	import CryptoJS from "crypto-es";
 	import { encryptSymmetricKey } from "@/utils/crypto/encryte";
 
 	const form = reactive({
@@ -30,12 +30,19 @@
 	async function submitLogin() {
 		const publicKeyRes = await getPublicKey();
 		const publicKey = publicKeyRes.data.publicKey;
-		console.log('公钥', publicKey);
 		const symmetricKey = CryptoJS.lib.WordArray.random(32).toString();
 		const hashedPassword = CryptoJS.SHA256(form.password).toString();
 		const encryptedPassword = CryptoJS.AES.encrypt(hashedPassword, symmetricKey).toString();
 		const encryptedSymmetricKey = await encryptSymmetricKey(publicKey, symmetricKey);
-		login({username: form.username, password: encryptedPassword, key: encryptedSymmetricKey});
+		const loginRes = await login({username: form.username, password: encryptedPassword, key: encryptedSymmetricKey});
+		if (loginRes.data.access_token) {
+			uni.setStorageSync('token', loginRes.data.access_token);
+			uni.redirectTo({
+				url: '/pages/index/index',
+			});
+		} else {
+			
+		}
 	}
 </script>
 

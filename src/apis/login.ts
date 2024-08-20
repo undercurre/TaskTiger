@@ -1,5 +1,4 @@
 import http from '../services/request/index';
-
 interface LoginPar {
 	username : string; password : string; key : string;
 }
